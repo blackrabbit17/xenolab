@@ -133,7 +133,7 @@ const chartOptions = {
 .graph-item-1, .graph-item-2, .graph-item-3, .graph-item-4 {
     position: absolute;
     width: 25%;
-    height: 160px;
+    height: 200px;
     background: rgba(40, 45, 55, 0.7);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.08);
     display: flex;
