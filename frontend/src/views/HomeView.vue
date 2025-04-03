@@ -1,6 +1,104 @@
 <script setup>
 import ModelView from '@/views/ModelView.vue';
+import LineChart from '@/components/graphs/LineChart.vue';
 
+// Sample data for the graphs
+const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+const temperatureData = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Temperature (°C)',
+      data: [22, 23, 24, 25, 26, 25, 24, 23, 22, 21, 20, 19],
+      fill: true,
+      borderColor: '#FF6B6B',
+      backgroundColor: 'rgba(255, 107, 107, 0.2)',
+      tension: 0.4
+    }
+  ]
+};
+
+const humidityData = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Humidity (%)',
+      data: [45, 50, 55, 60, 65, 62, 58, 55, 50, 47, 45, 42],
+      fill: true,
+      borderColor: '#48DBFB',
+      backgroundColor: 'rgba(72, 219, 251, 0.2)',
+      tension: 0.4
+    }
+  ]
+};
+
+const soilMoistureData = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Soil Moisture (%)',
+      data: [70, 65, 60, 55, 50, 45, 40, 38, 35, 33, 30, 28],
+      fill: true,
+      borderColor: '#1DD1A1',
+      backgroundColor: 'rgba(29, 209, 161, 0.2)',
+      tension: 0.4
+    }
+  ]
+};
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false
+    },
+    tooltip: {
+      mode: 'index',
+      intersect: false,
+      backgroundColor: 'rgba(20, 30, 40, 0.9)',
+      titleColor: '#fff',
+      bodyColor: '#fff',
+      borderColor: 'rgba(0, 229, 255, 0.3)',
+      borderWidth: 1
+    }
+  },
+  scales: {
+    x: {
+      display: false
+    },
+    y: {
+      display: true,
+      grid: {
+        color: 'rgba(255, 255, 255, 0.05)',
+        borderDash: [2, 4]
+      },
+      ticks: {
+        color: 'rgba(255, 255, 255, 0.5)',
+        font: {
+          size: 9
+        },
+        padding: 10,
+        maxTicksLimit: 5
+      }
+    }
+  },
+  elements: {
+    point: {
+      radius: 2,
+      hoverRadius: 4,
+      borderWidth: 2
+    },
+    line: {
+      borderWidth: 2
+    }
+  },
+  animation: {
+    duration: 800,
+    easing: 'easeOutQuart'
+  }
+};
 </script>
 <style scoped>
 .top-container {
@@ -38,7 +136,8 @@ import ModelView from '@/views/ModelView.vue';
     height: 100%;
     background: rgba(40, 45, 55, 0.7);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.08);
-    padding: 6px;
+    display: flex;
+    flex-direction: column;
 }
 .graph-item-1 {
     left: 0;
@@ -70,7 +169,30 @@ h1::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 70%;
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg,rgba(0, 229, 255, 0.50), transparent);
+}
+
+
+.lower_graph_h1 {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    background: rgb(190, 190, 190);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    padding: 3px;
+}
+
+.lower_graph_h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60%;
     height: 1px;
     background: linear-gradient(90deg,rgba(0, 229, 255, 0.50), transparent);
 }
@@ -93,6 +215,12 @@ h1::after {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    padding-top: 36px;
+}
+
+.chart-container {
+    flex: 1;
+    overflow: hidden;
 }
 </style>
 <template>
@@ -108,11 +236,38 @@ h1::after {
         </div>
     </div>
     <div class="graph-container">
-        <div class="graph-item-1">Temperature</div>
-        <div class="graph-item-2">Humidity</div>
-        <div class="graph-item-3">Soil Moisture</div>
+        <div class="graph-item-1">
+            <h1 class="lower_graph_h1">Temperature</h1>
+            <LineChart 
+                :chart-data="temperatureData"
+                :chart-options="chartOptions"
+                :height="110"
+                css-classes="chart-container"
+                :styles="{ width: '100%' }"
+            />
+        </div>
+        <div class="graph-item-2">
+            <h1 class="lower_graph_h1">Humidity</h1>
+            <LineChart 
+                :chart-data="humidityData"
+                :chart-options="chartOptions"
+                :height="110"
+                css-classes="chart-container"
+                :styles="{ width: '100%' }"
+            />
+        </div>
+        <div class="graph-item-3">
+            <h1 class="lower_graph_h1">Soil Moisture</h1>
+            <LineChart 
+                :chart-data="soilMoistureData"
+                :chart-options="chartOptions"
+                :height="110"
+                css-classes="chart-container"
+                :styles="{ width: '100%' }"
+            />
+        </div>
         <div class="graph-item-4">
-            Artificial
+            <h1 class="lower_graph_h1">Artificial</h1>
             <div>Light</div>
             <div>Wind</div>
         </div>
