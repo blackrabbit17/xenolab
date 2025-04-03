@@ -1,4 +1,6 @@
 <script setup>
+import ModelView from '@/views/ModelView.vue';
+
 </script>
 <style scoped>
 .top-container {
@@ -8,9 +10,9 @@
 .graph-container {
     position: relative;
     height: 160px;
-    top: 10px;
+    top: 0;
     display: flex;
-    margin-top: 20px;
+    margin-top: 0;
 }
 .left-container {
     position: absolute;
@@ -20,10 +22,6 @@
     height: 100%;
     background: rgba(30, 40, 50, 0.8);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.1);
-    transform: perspective(1000px) rotateX(2deg);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(8px);
-    padding: 15px;
 }
 .right-container {
     position: absolute;
@@ -33,14 +31,6 @@
     height: 100%;
     background: rgba(30, 40, 50, 0.8);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.1);
-    transform: perspective(1000px) rotateX(2deg);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(8px);
-    padding: 15px;
-}
-.left-container:hover, .right-container:hover {
-    transform: perspective(1000px) rotateX(0deg);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.15);
 }
 .graph-item-1, .graph-item-2, .graph-item-3, .graph-item-4 {
     position: absolute;
@@ -48,15 +38,7 @@
     height: 100%;
     background: rgba(40, 45, 55, 0.7);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.08);
-    transform: perspective(800px) rotateY(1deg);
-    transition: all 0.3s ease;
-    padding: 12px;
-    backdrop-filter: blur(5px);
-}
-.graph-item-1:hover, .graph-item-2:hover, .graph-item-3:hover, .graph-item-4:hover {
-    transform: perspective(800px) rotateY(0deg) translateZ(5px);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18), inset 0 1px rgba(255, 255, 255, 0.12);
-    background: rgba(45, 50, 60, 0.8);
+    padding: 6px;
 }
 .graph-item-1 {
     left: 0;
@@ -73,16 +55,14 @@
 
 h1 {
     text-transform: uppercase;
-    font-size: 1.0rem;
-    letter-spacing: 2px;
-    background: linear-gradient(135deg, #00e5ff, #2979ff);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    background: rgb(190, 190, 190);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 10px;
-    font-weight: 700;
     position: relative;
-    padding-bottom: 2px;
+    padding: 6px;
 }
 
 h1::after {
@@ -90,23 +70,41 @@ h1::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 60%;
+    width: 70%;
     height: 1px;
-    background: linear-gradient(90deg, #00e5ff, transparent);
+    background: linear-gradient(90deg,rgba(0, 229, 255, 0.50), transparent);
 }
 
+.left-container-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.model-view-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.cam-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 </style>
 <template>
     <div class="top-container">
         <div class="left-container">
             <div class="left-container-content">
-                <h1>Home</h1>
+                <h1>Drosera binata</h1>
+                <ModelView class="model-view-container" />
             </div>
         </div>
         <div class="right-container">
-            <div class="right-container-content">
-                <h1>Home</h1>
-            </div>
+            <img class="cam-img" src="@/assets/test_camera.png" alt="cam-img">
         </div>
     </div>
     <div class="graph-container">
