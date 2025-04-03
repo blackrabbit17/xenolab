@@ -133,11 +133,14 @@ const chartOptions = {
 .graph-item-1, .graph-item-2, .graph-item-3, .graph-item-4 {
     position: absolute;
     width: 25%;
-    height: 100%;
+    height: 160px;
     background: rgba(40, 45, 55, 0.7);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0 5px;
 }
 .graph-item-1 {
     left: 0;
@@ -221,13 +224,56 @@ h1::after {
 .chart-container {
     flex: 1;
     overflow: hidden;
+    max-height: 100%;
+    width: 100%;
+    position: relative;
 }
+.lifeform-name {
+    font-weight: 300;
+    color: rgba(0, 229, 255, 0.50);
+    letter-spacing: 1px;
+    background: rgb(190, 190, 190);
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin-left: 10px;
+}
+.atmos-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.atmos-item {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    background: rgb(190, 190, 190);
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+.control-icon {
+    width: 84px;
+    height: 84px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    margin-top: 5px;
+    background-color: rgba(19, 34, 36, 0.79);
+    border-radius: 4px;
+    padding: 4px;
+}
+.control-icon:hover {
+    opacity: 1;
+}
+
 </style>
 <template>
     <div class="top-container">
         <div class="left-container">
             <div class="left-container-content">
-                <h1>Drosera binata</h1>
+                <h1>LIFEFORM: <span class="lifeform-name">Drosera binata</span></h1>
                 <ModelView class="model-view-container" />
             </div>
         </div>
@@ -241,7 +287,7 @@ h1::after {
             <LineChart 
                 :chart-data="temperatureData"
                 :chart-options="chartOptions"
-                :height="110"
+                :height="100"
                 css-classes="chart-container"
                 :styles="{ width: '100%' }"
             />
@@ -251,7 +297,7 @@ h1::after {
             <LineChart 
                 :chart-data="humidityData"
                 :chart-options="chartOptions"
-                :height="110"
+                :height="100"
                 css-classes="chart-container"
                 :styles="{ width: '100%' }"
             />
@@ -261,15 +307,24 @@ h1::after {
             <LineChart 
                 :chart-data="soilMoistureData"
                 :chart-options="chartOptions"
-                :height="110"
+                :height="80"
                 css-classes="chart-container"
                 :styles="{ width: '100%' }"
             />
         </div>
         <div class="graph-item-4">
-            <h1 class="lower_graph_h1">Artificial</h1>
-            <div>Light</div>
-            <div>Wind</div>
+            <h1 class="lower_graph_h1">ATMOSPHERICS</h1>
+            
+            <div class="atmos-container">
+                <div class="atmos-item">
+                    Sunlight: ON
+                    <img src="@/assets/light-on.png" alt="Light Off" class="control-icon">
+                </div>
+                <div class="atmos-item">
+                    Wind: 0.4m/s
+                    <img src="@/assets/wind-on.png" alt="Wind Off" class="control-icon">
+                </div>
+            </div>
         </div>
     </div>
 

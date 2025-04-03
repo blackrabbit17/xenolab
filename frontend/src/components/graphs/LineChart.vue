@@ -40,19 +40,43 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  computed: {
+    mergedOptions() {
+      return {
+        ...this.chartOptions,
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    }
   }
 }
 </script>
 
 <template>
-  <Line
-    :data="chartData"
-    :options="chartOptions"
-    :chart-id="chartId"
-    :width="width"
-    :height="height"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :plugins="plugins"
-  />
-</template> 
+  <div class="chart-wrapper">
+    <Line
+      :data="chartData"
+      :options="mergedOptions"
+      :chart-id="chartId"
+      :width="width"
+      :height="height"
+      :css-classes="cssClasses"
+      :styles="styles"
+      :plugins="plugins"
+    />
+  </div>
+</template>
+
+<style scoped>
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+</style> 
