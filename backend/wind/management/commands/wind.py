@@ -36,7 +36,7 @@ class Command(BaseCommand):
             current_time = now.time()
             
             # Morning check (8:00am)
-            if current_time.hour > 8 and current_time.hour < 20:
+            if current_time.hour >= 8 and current_time.hour < 20:
                 # Check if we haven't turned on yet today
                 if not wind_is_on:
                     loguru.logger.info(f"Turning wind on at {now.strftime('%H:%M:%S')}")
@@ -50,9 +50,11 @@ class Command(BaseCommand):
                         timestamp=timezone.now(),
                         status=Wind.STATUS_WIND_ON
                     )
-            
+                else:
+                    loguru.logger.info(f"Wind is already on at {now.strftime('%H:%M:%S')}")
+
             # Evening check (8:00pm): Turn off if not already off today
-            if current_time.hour > 20 or current_time.hour < 8:
+            if current_time.hour >= 20 or current_time.hour < 8:
                 # Check if we haven't turned off yet today
                 if wind_is_on:
                     loguru.logger.info(f"Turning wind off at {now.strftime('%H:%M:%S')}")
@@ -66,7 +68,9 @@ class Command(BaseCommand):
                         timestamp=timezone.now(),
                         status=Wind.STATUS_WIND_OFF
                     )
-            
+                else:
+                    loguru.logger.info(f"Wind is already off at {now.strftime('%H:%M:%S')}")
+
             # Sleep for 60 seconds before checking again
             time.sleep(60)
     
