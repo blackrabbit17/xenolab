@@ -1,4 +1,4 @@
-## Xenolab - Rasp Pi monitor for my pet carnivourus plants
+## Xenolab - Rasp Pi monitor for my pet carnivorous plants
 The Xenolab Rasp Pi Monitor is a cutting-edge, semi-autonomous biosurveillance module engineered for the precise care and observation of exotic carnivorous flora. 
 
 > <br/>
