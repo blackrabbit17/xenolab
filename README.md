@@ -1,11 +1,9 @@
 ## Xenolab - Rasp Pi monitor for my pet carnivourus plants
-The Xenolab Rasp Pi Monitor is a cutting-edge, semi-autonomous biosurveillance and life-support module engineered for the precise care and observation of exotic carnivorous flora. 
-
-Originally conceptualized for off-world botanical research on xenobiotic ecosystems, the system integrates sensor arrays with realtime pattern analysis, ensuring optimal environmental conditions in both terrestrial and extraterrestrial habitats.
+The Xenolab Rasp Pi Monitor is a cutting-edge, semi-autonomous biosurveillance module engineered for the precise care and observation of exotic carnivorous flora. 
 
 > <br/>
 > ⚠️ WARNING: MONITORING TRIFFIDS<br/><br/>
-> The Xenolab Rasp Pi Monitor is not certified for use with Triffids or other semi-sentient, ambulatory flora. Historical data suggests a high incidence of operator attrition and catastrophic habitat compromise when engaging with such species. While the system may successfully log preliminary biometric data, prolonged monitoring is statistically correlated with acute reductions in observer longevity. Users are advised to consider the terminal nature of Triffid interactions before proceeding.<br/>— Xenolab Safety Directive 12.4B<br/><br/>
+> The Xenolab Rasp Pi Monitor is not certified for use with Triffids or other semi-sentient, ambulatory flora. Historical data suggests a high incidence of operator attrition and catastrophic habitat compromise when engaging with such species. While the system may successfully log preliminary biometric data, prolonged monitoring is statistically correlated with acute reductions in observer longevity.<br/>— Xenolab Safety Directive 12.4B<br/><br/>
 
 
 
