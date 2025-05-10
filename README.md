@@ -1,6 +1,14 @@
 ## Xenolab - Rasp Pi monitor for my pet carnivourus plants
+The Xenolab Rasp Pi Monitor is a cutting-edge, semi-autonomous biosurveillance and life-support module engineered for the precise care and observation of exotic carnivorous flora. 
 
-<br/><br/>
+Originally conceptualized for off-world botanical research on xenobiotic ecosystems, the system integrates sensor arrays with realtime pattern analysis, ensuring optimal environmental conditions in both terrestrial and extraterrestrial habitats.
+
+> <br/>
+> ⚠️ WARNING: MONITORING TRIFFIDS<br/><br/>
+> The Xenolab Rasp Pi Monitor is not certified for use with Triffids or other semi-sentient, ambulatory flora. Historical data suggests a high incidence of operator attrition and catastrophic habitat compromise when engaging with such species. While the system may successfully log preliminary biometric data, prolonged monitoring is statistically correlated with acute reductions in observer longevity. Users are advised to consider the terminal nature of Triffid interactions before proceeding.<br/>— Xenolab Safety Directive 12.4B<br/><br/>
+
+
+
 ### Xenolab Running
 -----------------------
 
@@ -30,7 +38,7 @@ I wanted to have some fun with 3D printing and electronics, which gets me away f
 -----------------------
 I'm really new at CAD, this was my first time. It's ok, you can laugh at my designs.
 
-I used the wonderful [tinkercad.com]() because I found that to be the most intuative for my n00b skillz.
+I used the wonderful [tinkercad.com]() because I found that to be the most intuative.
 
 ```
 I can code in my sleep, make logic unfold,
