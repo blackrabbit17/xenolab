@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "backend: wind",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/manage.py",
+            "args": ["wind"],
+            "cwd": "${workspaceFolder}/backend",
+            "console": "integratedTerminal"
+        }
+    ]
+}

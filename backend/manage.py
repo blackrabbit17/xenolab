@@ -3,6 +3,7 @@
 import os
 import sys
 
+import loguru
 
 def main():
     """Run administrative tasks."""
