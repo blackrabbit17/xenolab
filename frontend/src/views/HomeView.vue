@@ -1,6 +1,8 @@
 <script setup>
 import ModelView from '@/views/ModelView.vue';
 import LineChart from '@/components/graphs/LineChart.vue';
+import Api from '@/lib/api';
+import { ref, onMounted } from 'vue';
 
 // Sample data for the graphs
 const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -99,186 +101,51 @@ const chartOptions = {
     easing: 'easeOutQuart'
   }
 };
+
+const lifeformData = ref(null);
+const showFallbackImage = ref(false);
+const videoElement = ref(null);
+
+const handleVideoError = () => {
+  console.error('Video stream failed to load');
+  showFallbackImage.value = true;
+};
+
+const fetchLifeformData = async () => {
+  try {
+    const response = await Api.get('/lifeform/');
+    lifeformData.value = response;
+  } catch (error) {
+    console.error('Error fetching lifeform data:', error);
+  }
+};
+
+onMounted(async () => {
+  await fetchLifeformData();
+  
+  // Attempt to reload video after a delay
+  setTimeout(() => {
+    if (videoElement.value) {
+      videoElement.value.load();
+    }
+  }, 1000);
+});
 </script>
-<style scoped>
-.top-container {
-    position: relative;
-    height: 300px;
-}
-.graph-container {
-    position: relative;
-    height: 160px;
-    top: 0;
-    display: flex;
-    margin-top: 0;
-}
-.left-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background: rgba(30, 40, 50, 0.8);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.1);
-}
-.right-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: rgba(30, 40, 50, 0.8);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.1);
-}
-.graph-item-1, .graph-item-2, .graph-item-3, .graph-item-4 {
-    position: absolute;
-    width: 25%;
-    height: 180px;
-    background: rgba(40, 45, 55, 0.7);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.08);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-sizing: border-box;
-    padding: 0 5px;
-}
-.graph-item-1 {
-    left: 0;
-}
-.graph-item-2 {
-    left: 25%;
-}
-.graph-item-3 {
-    left: 50%;
-}
-.graph-item-4 {
-    left: 75%;
-}
-
-h1 {
-    text-transform: uppercase;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    background: rgb(190, 190, 190);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    position: relative;
-    padding: 6px;
-}
-
-h1::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg,rgba(0, 229, 255, 0.50), transparent);
-}
-
-
-.lower_graph_h1 {
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    background: rgb(190, 190, 190);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    position: relative;
-    padding: 3px;
-}
-
-.lower_graph_h1::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg,rgba(0, 229, 255, 0.50), transparent);
-}
-
-.left-container-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.model-view-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.cam-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    padding-top: 36px;
-}
-
-.chart-container {
-    flex: 1;
-    overflow: hidden;
-    max-height: 100%;
-    width: 100%;
-    position: relative;
-}
-.lifeform-name {
-    font-weight: 300;
-    color: rgba(0, 229, 255, 0.50);
-    letter-spacing: 1px;
-    background: rgb(190, 190, 190);
-    -webkit-background-clip: text;
-    background-clip: text;
-    margin-left: 10px;
-}
-.atmos-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-.atmos-item {
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    background: rgb(190, 190, 190);
-    -webkit-background-clip: text;
-    background-clip: text;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-}
-.control-icon {
-    width: 84px;
-    height: 84px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    margin-top: 5px;
-    background-color: rgba(19, 34, 36, 0.79);
-    border-radius: 4px;
-    padding: 4px;
-}
-.control-icon:hover {
-    opacity: 1;
-}
-
-</style>
 <template>
     <div class="top-container">
         <div class="left-container">
             <div class="left-container-content">
-                <h1>LIFEFORM: <span class="lifeform-name">Drosera binata</span></h1>
-                <ModelView class="model-view-container" />
+                <h1 v-if="lifeformData">LIFEFORM: <span class="lifeform-name">{{ lifeformData.lifeform }}</span></h1>
+                <img src="http://192.168.88.31:8000/map/" alt="map" class="map-img">
             </div>
         </div>
         <div class="right-container">
-            <img class="cam-img" src="@/assets/test_camera.png" alt="cam-img">
+            <img  
+                src="http://192.168.88.31:8000/camera/stream/0/" 
+                alt="Camera feed" 
+                class="camera-feed"
+                style="width: 100%; height: 100%; object-fit: contain;"
+            >
         </div>
     </div>
     <div class="graph-container">
@@ -329,3 +196,18 @@ h1::after {
     </div>
 
 </template>
+
+<style scoped>
+/* Add necessary container styling */
+.right-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.camera-feed {
+    max-width: 100%;
+    max-height: 100%;
+}
+</style>

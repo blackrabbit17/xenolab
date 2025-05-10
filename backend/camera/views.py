@@ -24,10 +24,12 @@ CAMERA_USE_LEGACY_DRIVER = os.environ.get('CAMERA_USE_LEGACY_DRIVER', 'false').l
 CAMERA_SKIP_HARDWARE_CHECK = os.environ.get('CAMERA_SKIP_HARDWARE_CHECK', 'false').lower() == 'true'
 # Use mock camera for development
 CAMERA_MOCK_MODE = os.environ.get('CAMERA_MOCK_MODE', 'false').lower() == 'true'
+# Enable autofocus for compatible cameras
+CAMERA_AUTOFOCUS = os.environ.get('CAMERA_AUTOFOCUS', 'true').lower() == 'true'
 
 
 class PiCameraStream:
-    def __init__(self, resolution=(640, 480), framerate=30, rotation=0, hq=False, awb_mode='auto', use_legacy=False):
+    def __init__(self, resolution=(640, 480), framerate=30, rotation=0, hq=True, awb_mode='auto', use_legacy=False, autofocus=True):
         self.resolution = resolution
         self.framerate = framerate
         self.rotation = rotation
@@ -39,6 +41,7 @@ class PiCameraStream:
         self.use_legacy = use_legacy
         self.last_error = None
         self.mock_mode = CAMERA_MOCK_MODE
+        self.autofocus = autofocus
         
     def check_camera_present(self):
         """Check if the Raspberry Pi camera module is properly connected"""
@@ -206,6 +209,15 @@ class PiCameraStream:
                         # Set rotation if needed
                         if self.rotation != 0:
                             controls["RotationDegrees"] = self.rotation
+                        
+                        # Set autofocus if enabled
+                        if self.autofocus:
+                            # Enable continuous autofocus (value 2)
+                            controls["AfMode"] = 2  # LIBCAMERA_AF_CONTINUOUS
+                            print("Enabling continuous autofocus")
+                        else:
+                            # Default to fixed focus (value 0)
+                            controls["AfMode"] = 0  # LIBCAMERA_AF_MANUAL
                             
                         # Apply all controls
                         if controls:
@@ -328,7 +340,8 @@ def _get_pi_camera():
             rotation=CAMERA_ROTATION,
             hq=CAMERA_HQ,
             awb_mode=CAMERA_AWB_MODE,
-            use_legacy=CAMERA_USE_LEGACY_DRIVER
+            use_legacy=CAMERA_USE_LEGACY_DRIVER,
+            autofocus=CAMERA_AUTOFOCUS
         )
     return _pi_camera
 
@@ -442,6 +455,7 @@ def camera_status(request, camera_id=None):
         'awb_mode': camera.awb_mode,
         'using_legacy_driver': camera.use_legacy,
         'mock_mode': camera.mock_mode,
+        'autofocus': camera.autofocus,
         'skip_hardware_check': CAMERA_SKIP_HARDWARE_CHECK,
         'last_error': camera.last_error,
         'system_info': system_info
@@ -453,7 +467,7 @@ def camera_control(request, camera_id=None):
     """Control camera (start/stop)"""
     action = request.POST.get('action')
     
-    if action not in ['start', 'stop', 'toggle_driver', 'toggle_mock']:
+    if action not in ['start', 'stop', 'toggle_driver', 'toggle_mock', 'toggle_autofocus']:
         return JsonResponse({'error': 'Invalid action'}, status=400)
     
     camera = _get_pi_camera()
@@ -523,6 +537,31 @@ def camera_control(request, camera_id=None):
                 else:
                     return JsonResponse({
                         'error': 'Failed to start camera in mock mode',
+                        'details': camera.last_error or "Unknown error"
+                    }, status=500)
+        
+        elif action == 'toggle_autofocus':
+            global CAMERA_AUTOFOCUS
+            with _camera_lock:
+                if camera.is_running:
+                    camera.stop()
+                
+                # Reset the camera with opposite autofocus setting
+                _pi_camera = None
+                CAMERA_AUTOFOCUS = not CAMERA_AUTOFOCUS
+                
+                # Get new camera instance with toggled autofocus
+                camera = _get_pi_camera()
+                result = camera.start()
+                
+                if result:
+                    return JsonResponse({
+                        'status': 'autofocus_toggled',
+                        'autofocus': CAMERA_AUTOFOCUS
+                    })
+                else:
+                    return JsonResponse({
+                        'error': 'Failed to start camera with new autofocus setting',
                         'details': camera.last_error or "Unknown error"
                     }, status=500)
             

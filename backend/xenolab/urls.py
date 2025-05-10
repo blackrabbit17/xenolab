@@ -20,7 +20,7 @@ from wind.views import wind_data
 from sunlight.views import sunlight_data
 from temphumidity.views import temphumidity_data
 from camera.views import camera_stream, camera_frame, camera_status, camera_control
-from xenolab.views import get_lifeform_data
+from xenolab.views import get_lifeform_data, map_png
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,4 +40,5 @@ urlpatterns = [
     
     # Xenolab endpoints
     path('lifeform/', get_lifeform_data, name='get_lifeform_data'),
+    path('map/', map_png, name='map_png'),
 ]
