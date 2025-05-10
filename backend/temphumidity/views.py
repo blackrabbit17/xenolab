@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from django.http import JsonResponse
 from temphumidity.models import TempHumidityReading
+
 
 def temphumidity_data(request):
     

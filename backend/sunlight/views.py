@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from django.http import JsonResponse
 from sunlight.models import Sunlight
+
 
 def sunlight_data(request):
 
