@@ -109,3 +109,11 @@ Power-on tests
 
 Sensor integration tests
 
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/construction_pics/IMG_5913.jpg" width="500">
+
+Finished connecting all the sensors up
+
+
+![](https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/finished.jpg)
+
+Finished and running!
