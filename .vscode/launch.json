@@ -2,6 +2,32 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "django - webserver",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/manage.py",
+            "args": ["runserver", "0.0.0.0:8000", "--noreload"],
+            "env": {
+                "CAMERA_SKIP_HARDWARE_CHECK": "true",
+                "CAMERA_USE_LEGACY_DRIVER": "false",
+                "PYTHONPATH": "/usr/lib/python3/dist-packages:${env:PYTHONPATH}"
+            },
+            "cwd": "${workspaceFolder}/backend",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "django - mock camera",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/manage.py",
+            "args": ["runserver", "0.0.0.0:8000", "--noreload"],
+            "env": {
+                "CAMERA_MOCK_MODE": "true"
+            },
+            "cwd": "${workspaceFolder}/backend",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "backend: wind",
             "type": "debugpy",
             "request": "launch",

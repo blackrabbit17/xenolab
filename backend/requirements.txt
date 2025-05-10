@@ -15,7 +15,12 @@ binho-host-adapter==0.1.6
 Django==5.2.1
 gpiod==2.3.0
 lgpio==0.2.2.0
+loguru==0.7.3
+numpy==2.2.5
+opencv-python==4.11.0.86
+picamera==1.13
 pigpio==1.78
+pillow==11.2.1
 pyftdi==0.56.0
 pyserial==3.5
 pyusb==1.3.1
