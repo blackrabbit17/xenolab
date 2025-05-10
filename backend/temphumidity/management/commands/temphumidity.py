@@ -22,7 +22,7 @@ class Command(BaseCommand):
             current_time = datetime.datetime.now()
             
             # Only take reading if the current minute is 00
-            if True or current_time.minute == 0:
+            if current_time.minute == 0:
                 temp_readings = []
                 humidity_readings = []
                 
