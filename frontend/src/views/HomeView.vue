@@ -239,7 +239,7 @@ onMounted(async () => {
                 src="http://192.168.88.31:8000/camera/stream/0/" 
                 alt="Camera feed" 
                 class="camera-feed"
-                style="width: 100%; height: 100%; object-fit: contain;"
+
             >
         </div>
     </div>
@@ -264,21 +264,24 @@ onMounted(async () => {
                 :styles="{ width: '100%' }"
             />
         </div>
-        <div class="graph-item-3">
+        <div class="graph-item-3" style="background-color: rgba(19, 34, 36);">
             <h1 class="lower_graph_h1">ATMOSPHERICS</h1>
             
             <div class="atmos-container">
                 <div class="atmos-item">
-                    Sunlight: ON
+                    Sunlight Simulation
                     <img src="@/assets/light-on.png" alt="Light Off" class="control-icon">
+                    <span class="atmos-item-text">ENABLED</span>
                 </div>
                 <div class="atmos-item">
-                    Soil Moisture: DETECTED
-                    <img src="@/assets/light-on.png" alt="Light Off" class="control-icon">
+                    Soil Moisture
+                    <img src="@/assets/water-on.png" alt="Light Off" class="control-icon">
+                    <span class="atmos-item-text">DETECTED</span>
                 </div>
                 <div class="atmos-item">
-                    Wind Simulation: 0.4m/s
+                    Wind Simulation
                     <img src="@/assets/wind-on.png" alt="Wind Off" class="control-icon">
+                    <span class="atmos-item-text">0.4m/s</span>
                 </div>
             </div>
         </div>
