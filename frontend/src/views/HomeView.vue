@@ -259,12 +259,12 @@ onMounted(async () => {
         <div class="left-container">
             <div class="left-container-content">
                 <h1 v-if="lifeformData">LIFEFORM: <span class="lifeform-name">{{ lifeformData.lifeform }}</span></h1>
-                <img src="http://192.168.88.31:8000/map/" alt="map" class="map-img">
+                <img src="http://127.0.0.1:8000/map/" alt="map" class="map-img">
             </div>
         </div>
         <div class="right-container">
             <img  
-                src="http://192.168.88.31:8000/camera/stream/0/" 
+                src="http://127.0.0.1:8000/camera/stream/0/" 
                 alt="Camera feed" 
                 class="camera-feed"
 
