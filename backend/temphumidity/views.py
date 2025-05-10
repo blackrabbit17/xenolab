@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from temphumidity.models import Temphumidity
+from temphumidity.models import TempHumidityReading
 
 def temphumidity_data(request):
     
     num_records = request.GET.get('num_records', 100)
     
-    latest_data = Temphumidity.objects.order_by('-timestamp').all()[:num_records]
+    latest_data = TempHumidityReading.objects.order_by('-timestamp').all()[:num_records]
     
     data = [
         {

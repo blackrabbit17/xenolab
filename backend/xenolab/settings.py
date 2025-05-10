@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'temphumidity',
     'wind',
     'sunlight',
+    'camera',
 ]
 
 MIDDLEWARE = [
