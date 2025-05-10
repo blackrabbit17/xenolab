@@ -170,16 +170,6 @@ onMounted(async () => {
             />
         </div>
         <div class="graph-item-3">
-            <h1 class="lower_graph_h1">Soil Moisture</h1>
-            <LineChart 
-                :chart-data="soilMoistureData"
-                :chart-options="chartOptions"
-                :height="80"
-                css-classes="chart-container"
-                :styles="{ width: '100%' }"
-            />
-        </div>
-        <div class="graph-item-4">
             <h1 class="lower_graph_h1">ATMOSPHERICS</h1>
             
             <div class="atmos-container">
@@ -188,7 +178,11 @@ onMounted(async () => {
                     <img src="@/assets/light-on.png" alt="Light Off" class="control-icon">
                 </div>
                 <div class="atmos-item">
-                    Wind: 0.4m/s
+                    Soil Moisture: DETECTED
+                    <img src="@/assets/light-on.png" alt="Light Off" class="control-icon">
+                </div>
+                <div class="atmos-item">
+                    Wind Simulation: 0.4m/s
                     <img src="@/assets/wind-on.png" alt="Wind Off" class="control-icon">
                 </div>
             </div>
