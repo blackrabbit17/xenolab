@@ -38,7 +38,7 @@ I wanted to have some fun with 3D printing and electronics, which gets me away f
 -----------------------
 I'm really new at CAD, this was my first time. It's ok, you can laugh at my designs.
 
-I used the wonderful [tinkercad.com]() because I found that to be the most intuative.
+I used the wonderful [tinkercad.com]() because I found that to be the most intuitive.
 
 ```
 I can code in my sleep, make logic unfold,
