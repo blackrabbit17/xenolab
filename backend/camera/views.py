@@ -21,7 +21,7 @@ CAMERA_HQ = os.environ.get('CAMERA_HQ', 'false').lower() == 'true'
 CAMERA_AWB_MODE = os.environ.get('CAMERA_AWB_MODE', 'auto')
 CAMERA_USE_LEGACY_DRIVER = os.environ.get('CAMERA_USE_LEGACY_DRIVER', 'false').lower() == 'true'
 # Skip hardware detection checks (useful for non-standard setups or when vcgencmd is unavailable)
-CAMERA_SKIP_HARDWARE_CHECK = os.environ.get('CAMERA_SKIP_HARDWARE_CHECK', 'false').lower() == 'true'
+CAMERA_SKIP_HARDWARE_CHECK = os.environ.get('CAMERA_SKIP_HARDWARE_CHECK', 'true').lower() == 'true'
 # Use mock camera for development
 CAMERA_MOCK_MODE = os.environ.get('CAMERA_MOCK_MODE', 'false').lower() == 'true'
 # Enable autofocus for compatible cameras
