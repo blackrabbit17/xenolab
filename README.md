@@ -31,3 +31,42 @@ I wanted to have some fun with 3D printing and electronics, which gets me away f
 <br/><br/>
 #### CAD + Physical Design
 -----------------------
+
+<br/><br/>
+### Build Pics
+-----------------------
+
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/construction_pics/IMG_5546.jpg" width="500">
+
+Setting up the RASP Pi 5s and testing some sensors
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/construction_pics/3dprinted.png" width="500">
+
+Fresh from the 3D printer!
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/construction_pics/FA9DE0F2-8E53-48A8-A0B5-AE390EFE8164.JPG" width="500">
+
+Coated in black because it looks better
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/construction_pics/IMG_5797.jpg" width="500">
+
+Starting to wire up the relays and power and sensors
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/construction_pics/IMG_5815.jpg" width="500">
+
+Power-on tests
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/construction_pics/PHOTO-2025-05-06-14-32-45.jpg" width="500">
+
+Sensor integration tests
+
