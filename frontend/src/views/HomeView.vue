@@ -244,14 +244,14 @@ onMounted(async () => {
     }
   }, 1000);
   
-  // Refresh all data every 10 minutes (600000 ms)
+  // Refresh all data every 11 minutes (60000 ms)
   setInterval(async () => {
     await fetchLifeformData();
     await fetchTempHumidityData();
     await fetchAtmosphericsData();
  
     console.log('Data refreshed at:', new Date().toLocaleTimeString());
-  }, 600000);
+  }, 60000);
 });
 </script>
 <template>
