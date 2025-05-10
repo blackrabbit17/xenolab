@@ -5,6 +5,9 @@
 
 
 ### Sample Code
+- Switch both relays ON
+- Wait 5 seconds
+- Switch both relays OFF
 ```
 import serial
 import time
@@ -23,11 +26,8 @@ def main():
  
     try:
         with serial.Serial(port_name, baud_rate, timeout=timeout) as ser_port:
-            
-            # Relay number
-            for relay_number in [1,]:
 
-                # Example 6: ON Relay 1
+            for relay_number in [1, 2]:
                 relay_on_command = f"relay on {relay_number}\r"
                 print(f"Relay {relay_number} ON ...", end="", flush=True)
                 send_command(ser_port, relay_on_command)
@@ -35,9 +35,7 @@ def main():
 
             time.sleep(5)
 
-            for relay_number in [1,]:
-
-                # Example 8: OFF Relay 1
+            for relay_number in [1, 2]:
                 relay_clear_command = f"relay off {relay_number}\r"
                 print(f"Relay {relay_number} OFF ...", end="", flush=True)
                 send_command(ser_port, relay_clear_command)
