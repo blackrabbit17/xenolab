@@ -1,17 +1,17 @@
 ## Xenolab - Rasp Pi monitor for my pet carnivourus plants
 
+<br/><br/>
 ### Xenolab Running
 -----------------------
 
-
+<br/><br/>
 ### Why?
 -----------------------
 I wanted to have some fun with 3D printing and electronics, which gets me away from my normal day job running Atomic Tessellator (https://atomictessellator.com). There are lots of aspects of this project that are wildly impractical and over-engineered and done just for fun.
 
 
-
-
-#### Electrical components
+<br/><br/>
+### Electrical components
 -----------------------
 | Intel & Control | Atmospherics | Temp + Moisture |
 |:--------------:|:---:|:-----------------:|
@@ -19,16 +19,33 @@ I wanted to have some fun with 3D printing and electronics, which gets me away f
 | ![](https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/subcomponents/camera/SEVRBP0544__5_preview.png)<br>Camera<br/>12.3 MP Sony IMX500       |![](https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/subcomponents/50mm-fan/XC5055_preview.png)<br>Wind Simulation<br/>50mm 12V DC Fan| ![](https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/subcomponents/soil-moisture/LM393_preview.png)<br/>Soil Moisture<br/>LM393 |
 
 <br/><br/>
-
-#### Computing
+### Computing
 -----------------------
 | [Rasp-pi 5](https://github.com/blackrabbit17/xenolab/tree/main/physical-build/computing/rasp-pi-5) | [Cooling Hat](https://github.com/blackrabbit17/xenolab/tree/main/physical-build/computing/cooling-hat) | [Display](https://github.com/blackrabbit17/xenolab/tree/main/physical-build/computing/display) |
 |:--------------:|:---:|:-----------------:|
 | ![](https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/computing/rasp-pi-5/pi5_preview.png)<br/>R-Pi 5 - 8GB<br/>Quad Core 2.4GHz<br/>ARM Cortex-A76 | ![](https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/computing/cooling-hat/cooling-hat_preview.png)<br/>R-Pi 5<br/>RGB Cooling Hat<br/>w/ OLED Display | ![](https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/computing/display/dfrobot-7in-800x480_preview.png)<br/>7" 800x480<br/>DSI Capacitive<br/>Touchscreen
 
 <br/><br/>
-#### CAD + Physical Design
+### CAD + Physical Design
 -----------------------
+I'm really new at CAD, this was my first time. It's ok, you can laugh at my designs.
+
+I used the wonderful [tinkercad.com]() because I found that to be the most intuative for my n00b skillz.
+
+```
+I can code in my sleep, make logic unfold,
+But hand me some CAD and my courage turns cold.
+Lines go zig when they clearly should zag,
+My blueprints look more like a digital gag.
+```
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/CAD/main_housing/preview2.png" width="383">
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/CAD/main_housing/preview1.png" width="250">
+
+[Model File](https://github.com/blackrabbit17/xenolab/tree/main/physical-build/CAD/main_housing)
+
+<img src="https://raw.githubusercontent.com/blackrabbit17/xenolab/refs/heads/main/physical-build/CAD/fan_housing/preview.png" width="383">
+
+[Model File](https://github.com/blackrabbit17/xenolab/tree/main/physical-build/CAD/fan_housing)
 
 <br/><br/>
 ### Build Pics
