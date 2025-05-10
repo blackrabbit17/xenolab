@@ -1,11 +1,8 @@
-from django.http import JsonResponse
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponse
+from django.conf import settings
 import json
 from sunlight.models import Sunlight
 from wind.models import Wind
-
-
-from django.conf import settings
 
 
 def get_lifeform_data(request):
@@ -22,7 +19,8 @@ def get_lifeform_data(request):
         lifeform_file = 'lifeform.venus.json'  # Default
     
     lifeform_path = settings.BASE_DIR / 'assets' / lifeform_file
-    lifeform_data = json.load(open(lifeform_path, 'r'))
+    with open(lifeform_path, 'r') as file:
+        lifeform_data = json.load(file)
     
     return JsonResponse(lifeform_data, safe=False)
 
@@ -42,7 +40,8 @@ def map_png(request):
     
     map_path = settings.BASE_DIR / 'assets' / map_file
     try:
-        map_data = open(map_path, 'rb').read()
+        with open(map_path, 'rb') as file:
+            map_data = file.read()
         return HttpResponse(map_data, content_type='image/png')
     except FileNotFoundError:
         return HttpResponse(status=404)

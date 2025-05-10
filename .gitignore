@@ -1,0 +1,26 @@
+# Project specific
+CLAUDE.md
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDE/Editor specific
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
