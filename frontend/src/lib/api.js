@@ -2,7 +2,7 @@
  * API client for making HTTP requests
  */
 class Api {
-  constructor(baseUrl = 'http://192.168.88.31:8000') {
+  constructor(baseUrl = 'http://127.0.0.1:8000') {
     this.baseUrl = baseUrl;
   }
 
