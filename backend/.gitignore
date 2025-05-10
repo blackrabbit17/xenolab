@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+assets/lifeform.json
+
 # Distribution / packaging
 .Python
 build/
