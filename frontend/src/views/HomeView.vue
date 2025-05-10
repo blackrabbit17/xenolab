@@ -4,6 +4,13 @@ import LineChart from '@/components/graphs/LineChart.vue';
 import Api from '@/lib/api';
 import { ref, onMounted } from 'vue';
 
+// Import images directly
+import lightOn from '@/assets/light-on.png';
+import lightOff from '@/assets/light-off.png';
+import waterOn from '@/assets/water-on.png';
+import windOn from '@/assets/wind-on.png';
+import windOff from '@/assets/wind-off.png';
+
 // Convert reactive references for chart data
 const labels = ref([]);
 const temperatureData = ref({
@@ -140,6 +147,12 @@ const lifeformData = ref(null);
 const showFallbackImage = ref(false);
 const videoElement = ref(null);
 
+// Add a reactive reference for atmospherics data
+const atmosphericsData = ref({
+  sunlight: { status: 0, r: 0, g: 0, b: 0, brightness: 0 },
+  wind: { status: 0, speed: 0 }
+});
+
 const handleVideoError = () => {
   console.error('Video stream failed to load');
   showFallbackImage.value = true;
@@ -206,10 +219,23 @@ const fetchTempHumidityData = async () => {
   }
 };
 
+const fetchAtmosphericsData = async () => {
+  try {
+    const response = await Api.get('/atmospherics/');
+    if (response) {
+      atmosphericsData.value = response;
+      console.log('Atmospherics data updated:', response);
+    }
+  } catch (error) {
+    console.error('Error fetching atmospherics data:', error);
+  }
+};
+
 onMounted(async () => {
   // Initial data loading
   await fetchLifeformData();
   await fetchTempHumidityData();
+  await fetchAtmosphericsData();
 
   // Attempt to reload video once after a delay
   setTimeout(() => {
@@ -222,6 +248,8 @@ onMounted(async () => {
   setInterval(async () => {
     await fetchLifeformData();
     await fetchTempHumidityData();
+    await fetchAtmosphericsData();
+ 
     console.log('Data refreshed at:', new Date().toLocaleTimeString());
   }, 600000);
 });
@@ -270,18 +298,35 @@ onMounted(async () => {
             <div class="atmos-container">
                 <div class="atmos-item">
                     Sunlight Simulation
-                    <img src="@/assets/light-on.png" alt="Light Off" class="control-icon">
-                    <span class="atmos-item-text">ENABLED</span>
+                    <img 
+                      :src="atmosphericsData.sunlight && atmosphericsData.sunlight.status ? lightOn : lightOff" 
+                      alt="Sunlight" 
+                      class="control-icon"
+                    >
+                    <span class="atmos-item-text">
+                      {{ atmosphericsData.sunlight && atmosphericsData.sunlight.status ? 'ENABLED' : 'DISABLED' }}
+                      <span v-if="atmosphericsData.sunlight && atmosphericsData.sunlight.status" class="atmos-item-detail">
+                        ({{ Math.round(atmosphericsData.sunlight.brightness * 100) }}%)
+                      </span>
+                    </span>
                 </div>
                 <div class="atmos-item">
                     Soil Moisture
-                    <img src="@/assets/water-on.png" alt="Light Off" class="control-icon">
+                    <img :src="waterOn" alt="Soil Moisture" class="control-icon">
                     <span class="atmos-item-text">DETECTED</span>
                 </div>
                 <div class="atmos-item">
                     Wind Simulation
-                    <img src="@/assets/wind-on.png" alt="Wind Off" class="control-icon">
-                    <span class="atmos-item-text">0.4m/s</span>
+                    <img 
+                      :src="atmosphericsData.wind && atmosphericsData.wind.status ? windOn : windOff" 
+                      alt="Wind" 
+                      class="control-icon"
+                    >
+                    <span class="atmos-item-text">
+                      {{ atmosphericsData.wind && atmosphericsData.wind.status ? 
+                         atmosphericsData.wind.speed.toFixed(1) + 'm/s' : 
+                         'DISABLED' }}
+                    </span>
                 </div>
             </div>
         </div>
@@ -301,5 +346,11 @@ onMounted(async () => {
 .camera-feed {
     max-width: 100%;
     max-height: 100%;
+}
+
+.atmos-item-detail {
+    font-size: 0.8em;
+    opacity: 0.7;
+    margin-left: 5px;
 }
 </style>
