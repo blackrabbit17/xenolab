@@ -26,6 +26,8 @@ class Command(BaseCommand):
 
         ser_port = serial.Serial(port_name, baud_rate, timeout=timeout)
         
+        loguru.logger.info(f"Worker starting up with port {port_name} and baud rate {baud_rate} and timeout {timeout}")
+
         # Keep track of current state and last change dates
         wind_is_on = False
 
@@ -37,6 +39,8 @@ class Command(BaseCommand):
             if current_time.hour > 8 and current_time.hour < 20:
                 # Check if we haven't turned on yet today
                 if not wind_is_on:
+                    loguru.logger.info(f"Turning wind on at {now.strftime('%H:%M:%S')}")
+
                     response = self.send_command(ser_port, RELAY_ON_COMMAND)
                     loguru.logger.info(f"Wind turned ON at {now.strftime('%H:%M:%S')}")
                     wind_is_on = True
@@ -51,6 +55,8 @@ class Command(BaseCommand):
             if current_time.hour > 20 or current_time.hour < 8:
                 # Check if we haven't turned off yet today
                 if wind_is_on:
+                    loguru.logger.info(f"Turning wind off at {now.strftime('%H:%M:%S')}")
+
                     response = self.send_command(ser_port, RELAY_OFF_COMMAND)
                     loguru.logger.info(f"Wind turned OFF at {now.strftime('%H:%M:%S')}")
                     wind_is_on = False
@@ -61,8 +67,8 @@ class Command(BaseCommand):
                         status=Wind.STATUS_WIND_OFF
                     )
             
-            # Sleep for 30 seconds before checking again
-            time.sleep(30)
+            # Sleep for 60 seconds before checking again
+            time.sleep(60)
     
     def send_command(self, ser_port, command):
         """Send command to serial port and return response"""
